@@ -1,24 +1,36 @@
 import pickle
 import io
+import json
+import urllib
 
-f = io.open('data', 'rb')
-data = pickle.load(f)
-f.close()
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
+
+data = {}
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('index_test.html')
 
 @app.route('/data/<month>')
 def get_month_data(month):
-    print month
+    print "requesting month %s" % (month)
     if not month in data:
-        return "not available"
-    return data[month]
+        f = io.open('data/' + month, 'rb')
+        data[month] = pickle.load(f)
+        f.close()
+    print data[month][0]
+    return render_template('map_test.html', readings=data[month])
+
+@app.route('/epic')
+def epic():
+  images_json = urllib.urlopen('http://epic.gsfc.nasa.gov/api/images.php?w=-15&e=30.0')
+  images_list = json.loads(images_json.read().decode("utf-8"))
+  return render_template('epic_final.html', images=images_list)
 
 if __name__ == "__main__":
-    print data.keys()
     app.run()
