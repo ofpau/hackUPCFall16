@@ -28,7 +28,7 @@ def get_month_data(month):
     carriers = ["vodafone", "movistar", "orange", "yoigo"]
     readings = [x for x in data[month] if x["fullCarrier"] in carriers]
     #readings = data[month]
-    return render_template('map_test.html', readings=readings[:800], carriers=carriers, month=month)
+    return render_template('map_test.html', readings=readings[:500], carriers=carriers, month=month)
 
 @app.route('/info')
 def epic():
