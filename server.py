@@ -24,7 +24,11 @@ def get_month_data(month):
         data[month] = pickle.load(f)
         f.close()
     print data[month][0]
-    return render_template('map_test.html', readings=data[month])
+    # carriers = list(set([x["fullCarrier"] for x in data[month]]))
+    carriers = ["vodafone", "movistar", "orange", "yoigo"]
+    readings = [x for x in data[month] if x["fullCarrier"] in carriers]
+    #readings = data[month]
+    return render_template('map_test.html', readings=readings[:800], carriers=carriers, month=month)
 
 @app.route('/epic')
 def epic():

@@ -16,10 +16,11 @@ for i, file in enumerate(os.listdir(data_path)):
             reader = csv.DictReader(csvfile)
             for i, row in enumerate(reader):
                 row_data = {}
-                row_data["timestamp"] = row["timestamp"]
+                #row_data["timestamp"] = row["timestamp"]
                 row_data["lat"] = row["lat"]
                 row_data["lng"] = row["lng"]
                 row_data["fullCarrier"] = row["fullCarrier"]
+                row_data["signal_avg"] = row["signal_avg"]
                 row_data["net_type"] = row["net_type"]
                 data.append(row_data)
             picklefile = io.open('./data/' + month_year, 'wb')
