@@ -30,11 +30,9 @@ def get_month_data(month):
     #readings = data[month]
     return render_template('map_test.html', readings=readings[:800], carriers=carriers, month=month)
 
-@app.route('/epic')
+@app.route('/info')
 def epic():
-  images_json = urllib.urlopen('http://epic.gsfc.nasa.gov/api/images.php?w=-15&e=30.0')
-  images_list = json.loads(images_json.read().decode("utf-8"))
-  return render_template('epic_final.html', images=images_list)
+  return render_template('info.html')
 
 if __name__ == "__main__":
     app.run()
