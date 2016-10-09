@@ -22,6 +22,9 @@ for i, file in enumerate(os.listdir(data_path)):
                 row_data["fullCarrier"] = row["fullCarrier"]
                 row_data["signal_avg"] = row["signal_avg"]
                 row_data["net_type"] = row["net_type"]
+                row_data["speed"] = row["speed"]
+                row_data["sat"] = row["satellites"]
+                row_data["act"] = row["activity"]
                 data.append(row_data)
             picklefile = io.open('./data/' + month_year, 'wb')
             print "file open"
